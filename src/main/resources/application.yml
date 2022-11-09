@@ -1,1 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/weather
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    show-sql: true
 
+yandex:
+  url: https://api.weather.yandex.ru/v2/forecast?lat=52.10306575&lon=23.72734336322081
+  header: X-Yandex-API-Key
+  key: ${YANDEX_KEY}
+
+management:
+  endpoints.web.exposure.include: 'prometheus, health'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
